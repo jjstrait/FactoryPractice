@@ -1,4 +1,5 @@
-package factorypractice;
+package factorypractice.springpractice;
+
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,10 +23,10 @@ public class AppWithFactory {
             Least Knowledge. Why do we need to know about the factory
             class at all here? We don't.
         */
-        Animal pet = 
-                AnimalFactory.createAnimal(PetSpecification.BIRD, "Robi");
-       
-        Person person = new Person("Jim", pet);
+        
+        final AbstractApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContextLab.xml");
+        
+        Person person = (Person)ctx.getBean("person");
         
         System.out.println("My name is: " + person.getName() 
             + ". I have a pet named " + person.getPet().getName()
@@ -42,10 +43,10 @@ public class AppWithFactory {
         */
         Person person2 = new Person("Bob", "MyRobin", PetSpecification.BIRD);
         
-        System.out.println("My name is: " + person.getName() 
-            + ". I have a pet named " + person.getPet().getName()
+        System.out.println("My name is: " + person2.getName() 
+            + ". I have a pet named " + person2.getPet().getName()
             + ", that speaks like this:");
-        person.getPet().speak();
+        person2.getPet().speak();
         
     }
 }
